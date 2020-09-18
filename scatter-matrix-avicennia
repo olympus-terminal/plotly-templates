@@ -1,0 +1,26 @@
+import plotly.express as px
+
+import pandas as pd
+
+
+df = pd.read_csv('TPMs-Avicennia-labeled.csv', dtype={"Name": str})
+
+
+textd = [ 'Name']
+
+fig = px.scatter_matrix(df, dimensions=["TPM-RedSea-Leaves","TPM-India-SRR2029735-Leaves","TPM-Shanghai-SRR4472291-Leaves-HeavyMetaltreat","TPM-Shanghai-SRR4472290-Leaves-C","TPM-Vietnam-DRR119672-leaves","TPM-India-SRR2029733-Leaves"],
+
+                 hover_name="Name")
+
+fig.update_layout(
+                  dragmode='select',
+
+                  hovermode='closest',
+
+
+                  )
+
+fig.write_image("./fig1.svg")
+
+
+fig.show()
