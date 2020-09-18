@@ -1,0 +1,18 @@
+import plotly.express as px
+
+import pandas as pd
+df = pd.read_csv('TPMs-Avicennia-labeled.csv', dtype={"name": str})
+
+
+
+#px.defaults.width = 1000
+#px.defaults.height = 1000
+
+fig = px.scatter(df, x="Length", y=["TPM-RedSea-Leaves","TPM-India-SRR2029738-Leaves-PEGtreat","TPM-Shanghai-SRR4472291-Leaves-HeavyMetaltreat","TPM-Shanghai-SRR4472290-Leaves-C","TPM-Vietnam-DRR119672-leaves","TPM-India-SRR2029733-Leaves"],
+marginal_y="violin", trendline="ols", template="simple_white", hover_name="Name", log_x=True, color_discrete_sequence=px.colors.qualitative.G10)
+
+
+fig.write_image("./scatter-violin.eps")
+fig.write_image("./scatter-violin.svg")
+fig.write_image("./scatter-violin.pdf")
+fig.show()
