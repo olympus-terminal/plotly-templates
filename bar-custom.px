@@ -1,0 +1,21 @@
+import plotly.express as px
+import pandas as pd
+
+import numpy as np
+import pandas as pd
+import sys
+import statsmodels.api as sm
+import math
+import plotly.tools as tls
+
+px.defaults.width = 2400
+px.defaults.height = 2400
+
+df = pd.read_csv(sys.argv[1])
+
+fig = px.bar(df, y="Assembly", x="tORFs", color="Source", orientation="h", color_continuous_scale='Bluered', template="seaborn", log_x="TRUE")
+
+#fig.write_image("./blast-contam-est.pdf")
+fig.write_image(sys.argv[2], format="svg")
+fig.write_image(sys.argv[3], format="pdf")
+fig.show()
