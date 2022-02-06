@@ -1,0 +1,28 @@
+import plotly.express as px
+import pandas as pd
+
+import pandas as pd
+
+px.defaults.width = 1600
+px.defaults.height = 600
+
+df = pd.read_csv('PositiveEvents-2b-dPSI.csv', dtype={"Time": str})
+
+
+fig = px.box(df, y="dPSI", x="Time", color="SpliceEvent", template="simple_white", log_y="True")
+fig.update_traces(marker=dict(outliercolor="#000",size=3) , boxmean="sd", boxpoints="all") # or "inclusive", or "linear" by default
+fig.update_traces(line=dict(width=1))
+fig.update_traces(quartilemethod="inclusive")
+
+
+fig.update_layout( # customize font and legend orientation & position
+    font_family="Arial",
+    legend=dict(
+        title=None, orientation="h", y=1, yanchor="bottom", x=0.5, xanchor="center"
+    )
+)
+
+fig.write_image("/Users/main/plotly/eps/POS-SPLITdPSI-events.eps")
+fig.write_image("/Users/main/plotly/svg/POS-SPLITdPSI-events.svg")
+fig.write_image("/Users/main/plotly/pdf/POS-SPLITdPSI-events.pdf")
+fig.show()
